@@ -38,8 +38,21 @@ public class ClienteService {
 	   
 	// Create a new cliente
 	   @PostMapping("/clientes")
-	   public Cliente createNote(@Valid @RequestBody Cliente cliente) {
-	       return clienteRepository.save(cliente);
+	   public ResponseEntity createNote(@Valid @RequestBody Cliente cliente) {
+		   List<Cliente> clientes = clienteRepository.findAll();
+		   if(clientes.size() == 0) {
+			   clienteRepository.save(cliente);
+		   }else {
+			   for (Cliente clienteType : clientes) {
+				    if(clienteType.getEmail().equals(cliente.getEmail())) {
+				    	System.out.println("Email duplicado, digite um email válido! ");
+				    	return new ResponseEntity<>(cliente, HttpStatus.BAD_REQUEST);
+				    }else {
+				    	clienteRepository.save(cliente);
+				    }
+				}
+		   }
+		   return new ResponseEntity<>(cliente, HttpStatus.OK);
 	   }
 	   
 	// Get a Single cliente
