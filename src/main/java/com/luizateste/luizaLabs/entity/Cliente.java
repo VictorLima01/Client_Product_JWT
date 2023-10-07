@@ -1,18 +1,17 @@
 package com.luizateste.luizaLabs.entity;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
 
-@JsonIgnoreProperties(value = {"listasProdutos"}, allowGetters = true)
+@Getter
+@Setter
 @Entity(name="CLIENTE")
 public class Cliente {
 		
@@ -23,31 +22,9 @@ public class Cliente {
 	    private String nome;
 	    private String email;
 	    
-	    @ManyToMany(targetEntity=Produtos.class, fetch=FetchType.EAGER)
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @ManyToMany(targetEntity=Produtos.class, fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+		@JoinColumn(name = "id")
+	   // @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private List<Produtos> listasProdutos;
-	
-	    
-		public List<Produtos> getListasProdutos() {
-			return listasProdutos;
-		}
-		public void setListasProdutos(Produtos produto) {
-			this.listasProdutos.add(produto);
-		}
-		public Cliente() {
-			super();
-		}
-		public String getNome() {
-			return nome;
-		}
-		public void setNome(String nome) {
-			this.nome = nome;
-		}
-		public String getEmail() {
-			return email;
-		}
-		public void setEmail(String email) {
-			this.email = email;
-		}
 
 }
