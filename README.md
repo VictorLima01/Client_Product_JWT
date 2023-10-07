@@ -1,5 +1,5 @@
-# Desafio-LuizaLabs
-Api em Spring boot para desafio Luiza labs
+# App Spring boot com implementação de token
+App Spring boot com implementação de token
 
 
 Api´s de criação de clientes e produtos e vinculando lista de produtos aos clientes. Api´s de CRUD e vincular produto ao cliente pelo id do cliente e id do produto.
