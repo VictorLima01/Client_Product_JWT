@@ -4,20 +4,27 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Entity(name="CLIENTE")
+@Table(name = "cliente")
 public class Cliente {
 		
 		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
+		@GeneratedValue(strategy = GenerationType.UUID)
+	    private String id;
 	 	
 	    private String nome;
 	    private String email;
